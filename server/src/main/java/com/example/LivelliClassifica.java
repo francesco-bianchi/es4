@@ -13,5 +13,10 @@ public class LivelliClassifica {
         livelli.add(numRand);
         
     }
+
+    public ArrayList<Integer> getLivelli() {
+        return livelli;
+    }
+
     
 }

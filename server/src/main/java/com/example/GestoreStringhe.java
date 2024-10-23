@@ -9,11 +9,15 @@ import java.net.Socket;
 
 public class GestoreStringhe extends Thread {
     Socket socket;
+    int size =0;
     int numRand;
+    LivelliClassifica livelli;
 
-    GestoreStringhe(Socket socket, int numRand){
+    GestoreStringhe(Socket socket){
         this.socket = socket;
-        this.numRand = numRand;
+        livelli = new LivelliClassifica();
+        livelli.creaLivelli();
+        numRand = livelli.getLivelli().get(0);
     }
 
     public void run(){
@@ -25,10 +29,10 @@ public class GestoreStringhe extends Thread {
             int tentativi =0;
             boolean indovinato= false;
             boolean rigioca = false;
-            System.out.println(numRand);
 
             do {
                 do {
+                    System.out.println(numRand);
                     tentativi++;
                     stringaRic = in.readLine();
                     numRic = Integer.parseInt(stringaRic);
@@ -54,6 +58,11 @@ public class GestoreStringhe extends Thread {
                 if(in.readLine().equals("s")){
                     rigioca = true;
                     tentativi = 0;
+                    if(livelli.getLivelli().size() <= size){
+                        livelli.creaLivelli();
+                    }
+                    numRand = livelli.getLivelli().get(size);
+                    size++;
                 }
                 else {
                     rigioca = false;

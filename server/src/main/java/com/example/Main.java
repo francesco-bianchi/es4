@@ -10,16 +10,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         
         ServerSocket serverSocket = new ServerSocket(3000);
-        
-        Random random = new Random();
-        int numRand = random.nextInt(100);
-
         System.out.println("Server connesso");
         
         while (true) {
             Socket socket = serverSocket.accept();
             System.out.println("Client connesso");
-            GestoreStringhe gs = new GestoreStringhe(socket, numRand);
+            GestoreStringhe gs = new GestoreStringhe(socket);
             gs.start();
         }
     }
